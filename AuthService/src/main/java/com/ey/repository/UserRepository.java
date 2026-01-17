@@ -10,5 +10,6 @@ import com.ey.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByMail(String mail);
     boolean existsByMail(String mail);
+	boolean existsByMailAndIdNot(String newMail, Long id);
 }
 

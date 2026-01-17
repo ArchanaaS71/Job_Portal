@@ -15,15 +15,15 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 	
-	private final String jwtSecret = "ThisIsASecretKeyThatIsAtleast32CharsLong";
-	private final long jwtExpirationMs = 600000;  //10 minutes
+	private final static String jwtSecret = "ThisIsASecretKeyThatIsAtleast32CharsLong";
+	private final static long jwtExpirationMs = 86400000;  //1 day
 	
-	private SecretKey getSigningKey() {
+	private static SecretKey getSigningKey() {
 		byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 	
-	public String generateToken(String username) {
+	public static String generateToken(String username) {
 		return Jwts.builder()
 				.setSubject(username)
 				.setIssuedAt(new Date())

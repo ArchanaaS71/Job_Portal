@@ -64,7 +64,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable());
         http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/signup", "/login", "/oauth2/**").permitAll()
+                .requestMatchers( "/auth/**", "/oauth2/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/consultant/**").hasRole("CONSULTANT")
                 .requestMatchers("/jobseeker/**").hasRole("JOB_SEEKER")

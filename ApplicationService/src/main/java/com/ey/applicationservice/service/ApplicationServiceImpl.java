@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
+import com.ey.applicationservice.client.JobClient;
+import com.ey.applicationservice.client.NotificationClient;
+import com.ey.applicationservice.client.UserClient;
 import com.ey.applicationservice.dto.request.ApplicationRequest;
 import com.ey.applicationservice.entity.JobApplication;
 import com.ey.applicationservice.enums.ApplicationStatus;
@@ -13,13 +18,27 @@ import com.ey.applicationservice.response.ApplicationResponse;
 
 import jakarta.validation.Valid;
 
+@Service
 public class ApplicationServiceImpl implements ApplicationService{
 
 	private final ApplicationRepository repository;
+	private final UserClient userClient;
+	private final JobClient jobClient;
+	private final NotificationClient notificationClient;
+	
 	 
-	public ApplicationServiceImpl(ApplicationRepository repository) {
+	public ApplicationServiceImpl(ApplicationRepository repository, JobClient jobClient, NotificationClient notificationClient, UserClient userClient, UserClient userClient2) {
 	        this.repository = repository;
-	    }
+			this.userClient = userClient;
+			this.jobClient = jobClient;
+			this.notificationClient = notificationClient;
+			
+	  }
+	@Override
+	public void applyJob(Long userId, Long jobId) {
+		userClient.getUserById(userId);
+		jobClient.getJobById(jobId);
+	}
 	
 	@Override
 	public ApplicationResponse applyForJob(@Valid ApplicationRequest request) {

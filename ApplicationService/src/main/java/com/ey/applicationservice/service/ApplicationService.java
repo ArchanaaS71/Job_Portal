@@ -20,4 +20,6 @@ public interface ApplicationService {
 
 	ApplicationResponse updateStatus(Long applicationId, ApplicationStatus status);
 
+	void applyJob(Long userId, Long jobId);
+
 }

@@ -3,11 +3,15 @@ package com.ey.userservices.services;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ey.userservices.entity.PasswordResetToken;
 import com.ey.userservices.entity.User;
 import com.ey.userservices.repository.PasswordResetTokenRepository;
 import com.ey.userservices.repository.UserRepository;
 
+@Service
 public class AuthServiceImpl implements AuthService {
 
 	private final UserRepository userRepository;

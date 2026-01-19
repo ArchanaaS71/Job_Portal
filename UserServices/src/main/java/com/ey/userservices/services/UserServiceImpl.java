@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.ey.userservices.dto.request.UserRegisterRequest;
 import com.ey.userservices.dto.response.UserResponse;
 import com.ey.userservices.entity.User;
@@ -13,6 +15,7 @@ import com.ey.userservices.repository.UserRepository;
 
 import jakarta.validation.Valid;
 
+@Service
 public class UserServiceImpl implements UserService{
 	
 	private final UserRepository userRepository;

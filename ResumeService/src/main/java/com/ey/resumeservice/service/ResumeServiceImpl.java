@@ -2,6 +2,7 @@ package com.ey.resumeservice.service;
 
 import java.io.IOException;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ey.resumeservice.entity.Resume;
@@ -9,6 +10,7 @@ import com.ey.resumeservice.exception.ResumeNotFoundException;
 import com.ey.resumeservice.repository.ResumeRepository;
 import com.ey.resumeservice.response.ResumeResponse;
 
+@Service
 public class ResumeServiceImpl implements ResumeService {
 
 	private final ResumeRepository repository;

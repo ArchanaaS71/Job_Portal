@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.ey.jobservice.dto.request.JobRequest;
 import com.ey.jobservice.dto.response.JobResponse;
 import com.ey.jobservice.entity.Job;
@@ -13,6 +15,7 @@ import com.ey.jobservice.repository.JobRepository;
 
 import jakarta.validation.Valid;
 
+@Service
 public class JobServiceImpl implements JobService {
 	   private final JobRepository jobRepository;
 	   

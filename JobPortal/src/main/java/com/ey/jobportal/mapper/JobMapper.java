@@ -1,10 +1,12 @@
 package com.ey.jobportal.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.ey.jobportal.dto.request.JobRequest;
 import com.ey.jobportal.dto.response.JobResponse;
 import com.ey.jobportal.entity.Job;
 
-
+@Component
 public class JobMapper {
 	
 	  public static Job toEntity(JobRequest request) {

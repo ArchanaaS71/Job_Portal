@@ -2,47 +2,60 @@ package com.ey.jobportal.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
- 
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
- 
+
 @Entity
 @Table(name = "employers")
 public class Employer {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
- 
+
     @NotBlank
     private String companyName;
- 
+
     @Email
     @NotBlank
     @Column(unique = true)
     private String email;
- 
+
     @NotBlank
     private String password;
- 
+
     private String companyWebsite;
- 
     private String industry;
- 
+
     @Column(length = 2000)
     private String companyDescription;
- 
+
     private Integer companySize;
- 
     private String headquartersLocation;
- 
     private LocalDate foundedDate;
- 
+
     private boolean active = true;
- 
+
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
     private List<Job> jobs;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "employer_roles",
+        joinColumns = @JoinColumn(name = "employer_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
 	public Long getId() {
 		return id;
@@ -140,34 +153,4 @@ public class Employer {
 		this.jobs = jobs;
 	}
 
-	public Employer(Long id, @NotBlank String companyName, @Email @NotBlank String email, @NotBlank String password,
-			String companyWebsite, String industry, String companyDescription, Integer companySize,
-			String headquartersLocation, LocalDate foundedDate, boolean active, List<Job> jobs) {
-		super();
-		this.id = id;
-		this.companyName = companyName;
-		this.email = email;
-		this.password = password;
-		this.companyWebsite = companyWebsite;
-		this.industry = industry;
-		this.companyDescription = companyDescription;
-		this.companySize = companySize;
-		this.headquartersLocation = headquartersLocation;
-		this.foundedDate = foundedDate;
-		this.active = active;
-		this.jobs = jobs;
-	}
-
-	public Employer() {
-		super();
-	}
-
-	public void setRoles(Set<Role> of) {
-		// TODO Auto-generated method stub
-		
-	}
-    
-    
-    
-    
-}    
+}

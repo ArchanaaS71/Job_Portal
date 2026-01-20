@@ -1,9 +1,12 @@
 package com.ey.jobportal.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.ey.jobportal.dto.request.RegisterUserRequest;
 import com.ey.jobportal.dto.response.UserResponse;
 import com.ey.jobportal.entity.User;
 
+@Component
 public class UserMapper {
 	public static User toEntity(RegisterUserRequest request) {
 		 
@@ -21,7 +24,7 @@ public class UserMapper {
         user.setHighestQualification(request.getHighestQualification());
         user.setResumeSummary(request.getResumeSummary());
         user.setDateOfBirth(request.getDateOfBirth());
-        user.setActive(true);
+//        user.setActive(true);
  
         return user;
     }
@@ -40,7 +43,7 @@ public class UserMapper {
         response.setLocation(user.getLocation());
         response.setExperienceYears(user.getExperienceYears());
         response.setHighestQualification(user.getHighestQualification());
-        response.setActive(user.isActive());
+//        response.setActive(user.isActive());
  
         return response;
     }

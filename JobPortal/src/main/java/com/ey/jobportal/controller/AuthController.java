@@ -2,13 +2,21 @@ package com.ey.jobportal.controller;
  
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
- 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ey.jobportal.dto.request.LoginRequest;
 import com.ey.jobportal.dto.request.RegisterEmployerRequest;
 import com.ey.jobportal.dto.request.RegisterUserRequest;
 import com.ey.jobportal.service.AuthService;
+
+import jakarta.validation.Valid;
  
 @RestController
 @RequestMapping("/api/auth")
@@ -20,13 +28,18 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
- 
     @PostMapping("/register/user")
-    public ResponseEntity<String> registerUser(@RequestBody RegisterUserRequest request) {
-        logger.info("Registering new user: {}", request.getEmail());
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(authService.registerUser(request));
+    public ResponseEntity<String> registerUser(@Valid @RequestBody RegisterUserRequest request) {
+
+        System.out.println("Controller: Registering new user: " + request.getEmail());
+
+        String response = authService.registerUser(request);
+
+        System.out.println("Controller: Registration successful");
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
  
     @PostMapping("/register/employer")
     public ResponseEntity<String> registerEmployer(@RequestBody RegisterEmployerRequest request) {
